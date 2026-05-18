@@ -1,0 +1,16 @@
+$date
+	Mon May 18 15:04:05 2026
+$end
+$version
+	QuestaSim Version 10.6c
+$end
+$timescale
+	1ps
+$end
+
+$scope module tx_tb $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+$end

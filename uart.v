@@ -17,11 +17,11 @@ output reg xmit_active;
 reg baud_clk;
 reg rx_en, ready_clr;
 
-u_baud #(.baud(2400),.xtal_clk(50000000)) baud_dut (.clk(sys_clk) , .baud_clk(baud_clk), .sys_rst_l(sys_rst_l)) ;
+u_baud #(.baud(baud),.xtal_clk(xtal_clk)) baud_dut (.clk(sys_clk) , .baud_clk(baud_clk), .sys_rst_l(sys_rst_l)) ;
 
-u_xmit #(.data_width(8)) tx_dut (.rst(sys_rst_l),.baud_clk(baud_clk),.xmit_H(xmit_H),.xmit_data(xmit_data), .uart_xmit_data_H(uart_xmit_data_H) ,.xmit_active(xmit_active),.xmit_done(xmit_done));
+u_xmit #(.data_width(data_width)) tx_dut (.rst(sys_rst_l),.baud_clk(baud_clk),.xmit_H(xmit_H),.xmit_data(xmit_data), .uart_xmit_data_H(uart_xmit_data_H) ,.xmit_active(xmit_active),.xmit_done(xmit_done));
 
 
-u_rx #(.data_width(8)) rx_dut (.baud_clk(baud_clk),.uart_rec_data_H(uart_rec_data_H),.rec_data_H(rec_data_H), .rec_ready(rec_ready), .rec_busy(rec_busy),.rx_en(rx_en),.ready_clr(ready_clr));
+u_rx #(.data_width(data_width)) rx_dut (.baud_clk(baud_clk),.uart_rec_data_H(uart_rec_data_H),.rec_data_H(rec_data_H), .rec_ready(rec_ready), .rec_busy(rec_busy),.rx_en(rx_en),.ready_clr(ready_clr));
 
 endmodule 

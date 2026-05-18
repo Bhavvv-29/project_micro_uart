@@ -1,0 +1,34 @@
+# vsim -c rx_tb 
+# Start time: 15:04:17 on May 18,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# //  Questa Sim
+# //  Version 10.6c linux Jul 25 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading work.rx_tb(fast)
+# TEST 1 : Sending 0x55
+#   FAIL : expected 0x55, got 0x00  ready=0
+# TEST 2 : Sending 0xA3
+#   FAIL : expected 0xA3, got 0x55  ready=0
+# TEST 3 : Sending 0x00
+#   FAIL : expected 0x00, got 0xa3  ready=0
+# TEST 4 : Sending 0xFF
+#   FAIL : expected 0xFF, got 0x00  ready=0
+# TEST 5 : Back-to-back 0x12 then 0x34
+#   FAIL : expected 0x12, got 0xff
+#   FAIL : expected 0x34, got 0x12
+# Simulation done.
+# ** Note: $finish    : rx_tb.v(200)
+#    Time: 20210 ns  Iteration: 1  Instance: /rx_tb
+# End time: 15:04:20 on May 18,2026, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0

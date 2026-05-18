@@ -1,3 +1,4 @@
+
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -20,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module u_xmit #(parameter data_width=8)(rst,baud_clk, xmit_H, xmit_data, uart_xmit_data_H ,xmit_active, xmit_done);
+module u_xmit #(parameter baud=2400 , parameter data_width=8)(rst,baud_clk, xmit_H, xmit_data, uart_xmit_data_H ,xmit_active, xmit_done);
 
 input wire baud_clk;
 input wire rst ;
@@ -56,7 +57,7 @@ always @(posedge baud_clk or negedge rst) begin
         end
         else begin
                 if (xmit_H) data_temp <=xmit_data;
-                else data_temp <= {data_width {1'b0}};
+                else data_temp <= data_temp;
         end
 end
 
@@ -128,5 +129,3 @@ begin
         endcase
         end
 endmodule
-
-
