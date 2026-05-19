@@ -1,10 +1,9 @@
-
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
 // 
-// Create Date: 18.05.2026 12:55:13
+// Create Date: 19.05.2026 10:51:12
 // Design Name: 
 // Module Name: u_rec
 // Project Name: 
@@ -41,7 +40,7 @@ module u_rec #(parameter data_width = 8) (
     reg [1:0] state;
     reg [3:0] sample; // counts the no of the sample 
     reg [2:0]  bit_pos; // data index
-    //reg [data_width-1:0] temp_data;   
+    reg [data_width-1:0] temp_data;   
     reg rxd_ff1;     
     reg rxd_ff2;     
 
@@ -65,7 +64,7 @@ module u_rec #(parameter data_width = 8) (
             bit_pos <= 3'd0;
             rec_ready <= 1'b0;
             rec_busy <= 1'b0;
-            //temp_data <= {data_width{1'b0}};
+            temp_data <= {data_width{1'b0}};
             rec_data_H <= {data_width{1'b0}};
         end
 
@@ -98,7 +97,7 @@ module u_rec #(parameter data_width = 8) (
                     start: begin
                         sample <= sample + 4'd1;
 
-                        if (sample == 4'd8) begin
+                        if (sample == 4'd6) begin
                             if (rxd_ff2 != 1'b0) begin
                                 state <= idle;
                                 sample <= 4'd0;
@@ -109,7 +108,8 @@ module u_rec #(parameter data_width = 8) (
                         else if (sample == 4'd15) begin
                             state <= r_data;
                             sample <= 4'd0;
-                            rec_data_H <= {data_width{1'b0}};
+                            //rec_data_H <= {data_width{1'b0}};
+                            temp_data <= {data_width{1'b0}};
                             bit_pos <= 3'd0;
                         end
                     end
@@ -118,8 +118,8 @@ module u_rec #(parameter data_width = 8) (
                     r_data: begin
                         sample <= sample + 4'd1;
 
-                        if (sample == 4'd8) begin
-                            rec_data_H[bit_pos] <= rxd_ff2;
+                        if (sample == 4'd6) begin
+                            temp_data[bit_pos] <= rxd_ff2;
                         end
 
                         if (sample == 4'd15) begin
@@ -146,7 +146,7 @@ module u_rec #(parameter data_width = 8) (
 
                         else if (sample == 4'd15) begin
                             state <= idle;
-                            //rec_data_H <= temp_data;
+                            rec_data_H <= temp_data;
                             rec_ready <= 1'b1;
                             rec_busy <= 1'b0;
                             sample <= 4'd0;
